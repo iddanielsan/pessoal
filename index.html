@@ -25,8 +25,9 @@
             "url": "https://dslm.com.br"
         }
     </script>
+    <script async src="https://unpkg.com/i18next@23.2.11/dist/umd/i18next.min.js"></script>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-892KLSBBTH"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-892KLSBBTH"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -51,8 +52,8 @@
     <header class="text-center text-white d-flex justify-content-center align-items-center masthead" style="background: #100f0f;width: 100%;height: 100vh;">
         <div class="text-center masthead-content" style="height: auto;">
             <div class="container" style="text-align: center;">
-                <h1 data-aos="fade-right" data-aos-delay="150" class="masthead-heading mb-0">Eu sou Daniel Lima</h1>
-                <h2 data-aos="fade-left" data-aos-delay="300" class="masthead-subheading mb-0">Desenvolvedor de Software</h2>
+                <h1 id="header_title" data-aos="fade-right" data-aos-delay="150" class="masthead-heading mb-0">Eu sou Daniel Lima</h1>
+                <h2 id="header_subtitle" data-aos="fade-left" data-aos-delay="300" class="masthead-subheading mb-0">Desenvolvedor de Software</h2>
             </div>
         </div>
     </header>
@@ -64,8 +65,8 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4" data-aos="fade-right" data-aos-duration="250">Um pouco sobre mim</h2>
-                        <p data-aos="fade-right" data-aos-duration="250">Iniciei minha jornada autodidata no mundo da tecnologia em 2012, explorando a web acabei conhecendo a linguagem de programação PHP e daí surgiu meu interesse por desenvolvimento, que virou hobby e, logo depois, profissão. Ao longo de minha trajetória, acabei conhecendo e trabalhando com muitas outras tecnologias.<br><br>Adoro minha família e amigos, valorizo muito o presente e as pessoas que estão ao meu lado. Sou extremamente apaixonado pelo Rio de Janeiro, que é o meu lugar favorito no Brasil, onde inúmeros momentos felizes criaram raízes na minha memória.</p>
+                        <h2 id="about_me_title" class="display-4" data-aos="fade-right" data-aos-duration="250">Um pouco sobre mim</h2>
+                        <p id="about_me_description" data-aos="fade-right" data-aos-duration="250">Iniciei minha jornada autodidata no mundo da tecnologia em 2012, explorando a web acabei conhecendo a linguagem de programação PHP e daí surgiu meu interesse por desenvolvimento, que virou hobby e, logo depois, profissão. Ao longo de minha trajetória, acabei conhecendo e trabalhando com muitas outras tecnologias.<br><br>Adoro minha família e amigos, valorizo muito o presente e as pessoas que estão ao meu lado. Sou extremamente apaixonado pelo Rio de Janeiro, que é o meu lugar favorito no Brasil, onde inúmeros momentos felizes criaram raízes na minha memória.</p>
                     </div>
                 </div>
             </div>
@@ -182,6 +183,48 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/aos.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const translate = async () => {
+                document.getElementById('header_title').innerHTML = i18next.t('header_title');
+                document.getElementById('header_subtitle').innerHTML = i18next.t('header_subtitle');
+                document.getElementById('about_me_description').innerHTML = i18next.t('about_me_description');
+                document.getElementById('about_me_title').innerHTML = i18next.t('about_me_title');
+            }
+
+            i18next.init({
+                lng: 'en',
+                fallbackLng: 'en',
+                debug: true,
+                resources: {
+                    en: {
+                        translation: {
+                            "header_title": "I'm Daniel Lima",
+                            "header_subtitle": "Software Developer",
+                            "about_me_title": "A little about myself",
+                            "about_me_description": "I started my self-taught journey in the world of technology back in 2012. While exploring the web, I came across the PHP programming language, and from there, my interest in development emerged, eventually becoming both a hobby and a profession. Throughout my journey, I ended up learning and working with many other technologies. </br></br>I love my family and friends, and I highly value the present and the people who are by my side. I am extremely passionate about Rio de Janeiro, which is my favorite place in Brazil, where countless happy moments have taken root in my memory."
+                        }
+                    },
+                    pt: {
+                        translation: {
+                            "header_title": "Eu sou Daniel Lima",
+                            "header_subtitle": "Desenvolvedor de Software",
+                            "about_me_title": "Um pouco sobre mim",
+                            "about_me_description": "Iniciei minha jornada autodidata no mundo da tecnologia em 2012, explorando a web acabei conhecendo a linguagem de programação PHP e daí surgiu meu interesse por desenvolvimento, que virou hobby e, logo depois, profissão. Ao longo de minha trajetória, acabei conhecendo e trabalhando com muitas outras tecnologias. </br></br>Adoro minha família e amigos, valorizo muito o presente e as pessoas que estão ao meu lado. Sou extremamente apaixonado pelo Rio de Janeiro, que é o meu lugar favorito no Brasil, onde inúmeros momentos felizes criaram raízes na minha memória."
+                        }
+                    }
+                }
+            });
+
+            const browserLang = window.navigator.language.slice(0, 2);
+
+            i18next.changeLanguage(browserLang.toLowerCase(), (err, t) => {
+                translate()
+            });
+        })
+    </script>
 </body>
 
 </html>
